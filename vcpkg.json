@@ -1,0 +1,9 @@
+{
+  "name" : "xviz-zero",
+  "version-string" : "1.0.0",
+  "builtin-baseline" : "e249dfb528731136b66d5fab6c6e00be243cbbbc",
+  "dependencies" : [ {
+    "name" : "raylib",
+    "version>=" : "4.2.0#1"
+  } ]
+}
