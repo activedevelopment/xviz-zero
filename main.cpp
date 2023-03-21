@@ -49,7 +49,7 @@ int main() {
   InitWindow(screenWidth, screenHeight, "xviz");
 
   while (!WindowShouldClose()) {
-    RdKafka::Message *msg = consumer->consume(topic, 0, 1000);
+    RdKafka::Message *msg = consumer->consume(topic, 0, 0);
 
     if (msg->err() == RdKafka::ERR_NO_ERROR) {
       processMessage(static_cast<const char *>(msg->payload()), circles);

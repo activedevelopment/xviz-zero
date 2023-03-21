@@ -66,7 +66,14 @@ That mostly worked, but it got the Kafka header location wrong:
 #include "librdkafka/rdkafkacpp.h"
 ```
 
-## whatever
+## Fix Timeout
+
+The call to get the message from Kafka should have a zero timeout. How do you
+fix that one line?
+
+```cpp
+RdKafka::Message* msg = consumer->consume(topic, 0, 0);
+```
 
 
 
