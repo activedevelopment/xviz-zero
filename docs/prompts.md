@@ -97,6 +97,9 @@ Here's the updated main.cpp:
 
 _I want to run Kafka in a Docker container when I am debugging._
 
+_NOTE: I already have ad-kafka running in Docker, so I will not do this. But I
+just wanted to have the commands._
+
 To run Kafka in a Docker container, you can use the confluentinc/cp-kafka
 image. This image includes Kafka as well as its dependency, Zookeeper. First,
 make sure you have Docker installed on your system. Then, follow these steps:
