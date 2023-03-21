@@ -5,5 +5,11 @@
   "dependencies" : [ {
     "name" : "raylib",
     "version>=" : "4.2.0#1"
+  }, {
+    "name" : "nlohmann-json",
+    "version>=" : "3.11.2"
+  }, {
+    "name" : "librdkafka",
+    "version>=" : "2.0.2"
   } ]
 }
