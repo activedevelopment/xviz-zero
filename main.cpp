@@ -49,14 +49,25 @@ int main() {
   InitWindow(screenWidth, screenHeight, "xviz");
 
   while (!WindowShouldClose()) {
-    RdKafka::Message *msg = consumer->consume(topic, 0, 0);
+    RdKafka::Message* msg = nullptr;
 
-    if (msg->err() == RdKafka::ERR_NO_ERROR) {
-      processMessage(static_cast<const char *>(msg->payload()), circles);
-    }
+    // Keep consuming messages until no more messages are available
+    do {
+      if (msg != nullptr) {
+        delete msg;
+      }
+      msg = consumer->consume(topic, 0, 0);
+
+      if (msg->err() == RdKafka::ERR_NO_ERROR) {
+        processMessage(static_cast<const char*>(msg->payload()), circles);
+      }
+    } while (msg->err() == RdKafka::ERR_NO_ERROR);
 
     delete msg;
 
+
+
+    // -------------------------------------------------------------------------
     BeginDrawing();
     ClearBackground(RAYWHITE);
 
@@ -64,7 +75,17 @@ int main() {
       DrawCircle(150, 150, 50, color);
     }
 
+    DrawPixel(10, 10, GREEN);
+    DrawLine(20, 20, 80, 80, YELLOW);
+//    DrawBezier({40, 40}, {70, 70}, {100, 100}, {130, 130}, 3, BLACK);
+    DrawCircle(150, 150, 50, RED);
+    DrawEllipse(300, 200, 100, 50, BROWN);
+    DrawRing({400, 300}, 40, 80, 0, 360, 32, LIME);
+    DrawRectangle(500, 100, 80, 120, SKYBLUE);
+    DrawTriangle({600, 50}, {620, 120}, {680, 60}, VIOLET);
+
     EndDrawing();
+    // -------------------------------------------------------------------------
   }
 
   consumer->stop(topic, 0);

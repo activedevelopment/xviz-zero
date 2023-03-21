@@ -1,4 +1,5 @@
 
+-----
 ## Raylib
 
 I want a C++ program (named xviz) that uses CMake and uses Raylib. Please include
@@ -19,6 +20,7 @@ directory for your project and then create the following files:
 Note that 'TEAL' and 'CYAN' are not Raylib colors. (I changed them to SKYBLUE and
 VIOLET, respectively.)
 
+-----
 ## Add in Kafka
 
 Please enhance xviz by adding support for reading from Kafka. It should read all
@@ -40,6 +42,7 @@ Update the CMakeLists.txt to include cppkafka and nlohmann/json:
 
 GPT's response used cppkafka, which I couldn't get to work with CMake/vcpkg.
 
+-----
 ## Change to librdkafka
 
 Can you please change to using librdkafka?
@@ -66,6 +69,7 @@ That mostly worked, but it got the Kafka header location wrong:
 #include "librdkafka/rdkafkacpp.h"
 ```
 
+-----
 ## Fix Timeout
 
 The call to get the message from Kafka should have a zero timeout. How do you
@@ -75,5 +79,17 @@ fix that one line?
 RdKafka::Message* msg = consumer->consume(topic, 0, 0);
 ```
 
+-----
+## Read all Messages
+
+xviz should read messages out of the topic until there are no more to read.
+What is the fix for that?
+
+```
+To read messages from the topic until there are no more to read, you can
+modify the main loop in the main.cpp file. Use a nested loop to keep consuming
+messages with a zero timeout until an error occurs or no message is available.
+Here's the updated main.cpp:
+```
 
 
