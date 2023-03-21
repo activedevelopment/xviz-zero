@@ -92,4 +92,59 @@ messages with a zero timeout until an error occurs or no message is available.
 Here's the updated main.cpp:
 ```
 
+-----
+## Dockerize Kafak
+
+_I want to run Kafka in a Docker container when I am debugging._
+
+To run Kafka in a Docker container, you can use the confluentinc/cp-kafka
+image. This image includes Kafka as well as its dependency, Zookeeper. First,
+make sure you have Docker installed on your system. Then, follow these steps:
+
+1. Create a new file named docker-compose.yml in your project directory,
+   alongside the CMakeLists.txt file.
+
+2. Add the following contents to the docker-compose.yml file:
+
+```yaml
+version: '3.8'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+```
+
+3. Run the following command in the terminal to start Kafka and Zookeeper in
+   Docker containers:
+
+```shell
+docker compose up -d
+```
+
+This command will start Zookeeper and Kafka, with Kafka listening on localhost:9092.
+You can now debug your xviz application, and it will connect to the Kafka broker
+running in the Docker container.
+
+When you're done debugging and want to stop Kafka and Zookeeper, run the following
+command:
+
+```shell
+docker compose down
+```
+
+This command will stop and remove the containers. Remember to start Kafka and
+Zookeeper with `docker-compose up -d` before debugging your application, and stop them
+with `docker-compose down` when you're done.
 
