@@ -1,5 +1,3 @@
-
 # xviz
 
 Visualization of whatever.
-

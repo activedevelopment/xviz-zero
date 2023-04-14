@@ -1,12 +1,11 @@
+---
 
------
 ## Raylib
 
 I want a C++ program (named xviz) that uses CMake and uses Raylib. Please include
 the typical Raylib draw loop, and inside this loop, draw a green pixel, a yellow
 line, a black bezier curve, a red circle, a brown ellipse, a lime ring, a teal
 rectangle, and a cyan triangle.
-
 
 ```
 Sure, here's a basic C++ program that meets your requirements. Make sure you
@@ -20,7 +19,8 @@ directory for your project and then create the following files:
 Note that 'TEAL' and 'CYAN' are not Raylib colors. (I changed them to SKYBLUE and
 VIOLET, respectively.)
 
------
+---
+
 ## Add in Kafka
 
 Please enhance xviz by adding support for reading from Kafka. It should read all
@@ -42,7 +42,8 @@ Update the CMakeLists.txt to include cppkafka and nlohmann/json:
 
 GPT's response used cppkafka, which I couldn't get to work with CMake/vcpkg.
 
------
+---
+
 ## Change to librdkafka
 
 Can you please change to using librdkafka?
@@ -69,7 +70,8 @@ That mostly worked, but it got the Kafka header location wrong:
 #include "librdkafka/rdkafkacpp.h"
 ```
 
------
+---
+
 ## Fix Timeout
 
 The call to get the message from Kafka should have a zero timeout. How do you
@@ -79,7 +81,8 @@ fix that one line?
 RdKafka::Message* msg = consumer->consume(topic, 0, 0);
 ```
 
------
+---
+
 ## Read all Messages
 
 xviz should read messages out of the topic until there are no more to read.
@@ -92,7 +95,8 @@ messages with a zero timeout until an error occurs or no message is available.
 Here's the updated main.cpp:
 ```
 
------
+---
+
 ## Dockerize Kafak
 
 _I want to run Kafka in a Docker container when I am debugging._
@@ -150,4 +154,3 @@ docker compose down
 This command will stop and remove the containers. Remember to start Kafka and
 Zookeeper with `docker-compose up -d` before debugging your application, and stop them
 with `docker-compose down` when you're done.
-
